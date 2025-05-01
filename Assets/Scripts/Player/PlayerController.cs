@@ -7,21 +7,31 @@ public class PlayerController : MonoBehaviour
 {
     public float walkSpeed = 5f;
     public float runSpeed = 10f;
+    public float airWalkSpeed = 5f;
     public float jumpImpulse = 10f;
 
     public float CurrentMoveSpeed
     {
         get
         {
-            if(IsMoving)
+            if(IsMoving && !touchingDirections.IsOnWall)
             {
-                if (IsRunning)
+                if(touchingDirections.IsGrounded)
                 {
-                    return runSpeed;
+                    // Ground speed
+                    if (IsRunning)
+                    {
+                        return runSpeed;
+                    }
+                    else
+                    {
+                        return walkSpeed;
+                    }
                 }
                 else
                 {
-                    return walkSpeed;
+                    // Air speed
+                    return airWalkSpeed;
                 }
             }
             else
@@ -134,7 +144,7 @@ public class PlayerController : MonoBehaviour
     public void OnJump(InputAction.CallbackContext context)
     {
         // TODO: check if alive as well
-        if (context.started && touchingDirections.IsGround)
+        if (context.started && touchingDirections.IsGrounded)
         {
             animator.SetTrigger(AnimationStrings.jump);
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpImpulse);
