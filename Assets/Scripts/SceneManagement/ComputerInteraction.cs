@@ -7,7 +7,6 @@ public class ComputerInteraction : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        // Check if the object that entered the trigger is the player
         if (collision.gameObject.CompareTag("Player"))
         {
             // Stop timer before loading win scene
@@ -16,7 +15,7 @@ public class ComputerInteraction : MonoBehaviour
                 Timer.instance.StopTimer();
             }
 
-            // Load the win scene
+            // Load win scene
             SceneManager.LoadScene(winSceneName);
         }
     }

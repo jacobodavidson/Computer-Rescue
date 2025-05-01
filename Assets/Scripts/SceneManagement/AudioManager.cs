@@ -5,7 +5,6 @@ using System.Collections;
 
 public class AudioManager : MonoBehaviour
 {
-    // Singleton pattern
     public static AudioManager Instance { get; private set; }
     
     [SerializeField] private AudioSource musicSource;
@@ -13,13 +12,12 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip menuMusic;
     [SerializeField] private float crossFadeDuration = 1.0f;
     
-    private AudioSource crossFadeSource; // Secondary source for crossfading
+    private AudioSource crossFadeSource;
     private int currentSceneIndex = -1;
     private bool isCrossFading = false;
     
     private void Awake()
     {
-        // Implement singleton
         if (Instance == null)
         {
             Instance = this;
@@ -50,14 +48,14 @@ public class AudioManager : MonoBehaviour
     {
         int newSceneIndex = scene.buildIndex;
         
-        // Check if we're in the title scene
+        // Check if in title scene
         if (scene.name == "Title")
         {
             PlayMusic(menuMusic);
             return;
         }
         
-        // If we have a track for this scene, play it
+        // If track for this scene, play it
         if (newSceneIndex < musicTracks.Length && musicTracks[newSceneIndex] != null)
         {
             PlayMusic(musicTracks[newSceneIndex]);
@@ -68,20 +66,20 @@ public class AudioManager : MonoBehaviour
     
     public void PlayMusic(AudioClip newTrack)
     {
-        // If we're already playing this track, do nothing
+        // If already playing this track, do nothing
         if (musicSource.clip == newTrack && musicSource.isPlaying)
         {
             return;
         }
         
-        // If we're already cross-fading, stop that coroutine
+        // If already cross-fading, stop that coroutine
         if (isCrossFading)
         {
             StopAllCoroutines();
             isCrossFading = false;
         }
         
-        // If we're not playing anything yet, just start playing
+        // If not playing anything yet, just start playing
         if (musicSource.clip == null || !musicSource.isPlaying)
         {
             musicSource.clip = newTrack;
@@ -89,7 +87,7 @@ public class AudioManager : MonoBehaviour
             return;
         }
         
-        // Otherwise, crossfade to the new track
+        // Otherwise, crossfade to new track
         StartCoroutine(CrossFadeMusic(newTrack));
     }
     
@@ -97,14 +95,14 @@ public class AudioManager : MonoBehaviour
     {
         isCrossFading = true;
         
-        // Set up the crossfade source with the new track
+        // Set up crossfade source with new track
         crossFadeSource.clip = newTrack;
         crossFadeSource.volume = 0;
         crossFadeSource.Play();
         
         float startVolume = musicSource.volume;
         
-        // Fade out the current track and fade in the new track
+        // Fade out current track and fade in new track
         for (float t = 0; t < crossFadeDuration; t += Time.deltaTime)
         {
             musicSource.volume = Mathf.Lerp(startVolume, 0, t / crossFadeDuration);
@@ -112,12 +110,12 @@ public class AudioManager : MonoBehaviour
             yield return null;
         }
         
-        // Swap the audio sources
+        // Swap audio sources
         AudioSource temp = musicSource;
         musicSource = crossFadeSource;
         crossFadeSource = temp;
         
-        // Stop the old track
+        // Stop old track
         crossFadeSource.Stop();
         crossFadeSource.clip = null;
         crossFadeSource.volume = 0;

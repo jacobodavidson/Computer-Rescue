@@ -11,7 +11,7 @@ public class Timer : MonoBehaviour
     private float timeElapsed = 0f;
     private bool isRunning = false;
     
-    // Static variable to store the final time for access in the Win scene
+    // Static variable to store final time for access in Win scene
     public static float finalTime = 0f;
 
     private void Awake()
@@ -30,7 +30,7 @@ public class Timer : MonoBehaviour
 
     private void Start()
     {
-        // Start the timer when the game begins
+        // Start timer when the game begins
         StartTimer();
     }
 
@@ -41,7 +41,7 @@ public class Timer : MonoBehaviour
             // Update time elapsed
             timeElapsed += Time.deltaTime;
             
-            // Format and display the time
+            // Format and display time
             DisplayTime();
         }
     }

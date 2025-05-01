@@ -14,7 +14,7 @@ public class WinSceneManager : MonoBehaviour
     
     private void DisplayFinalTime()
     {
-        // Get the final time from the Timer class
+        // Get final time from Timer class
         float finalTime = Timer.finalTime;
         
         // Format time
