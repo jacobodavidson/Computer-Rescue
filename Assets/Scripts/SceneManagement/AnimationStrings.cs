@@ -5,6 +5,8 @@ internal class AnimationStrings
     internal static string isMoving = "isMoving";
     internal static string isRunning = "isRunning";
     internal static string jump = "jump";
+    internal static string shootAttackTrigger = "shootAttack";
+    internal static string canMove = "canMove";
 
     internal static string yVelocity = "yVelocity";
     internal static string isGrounded = "isGrounded";

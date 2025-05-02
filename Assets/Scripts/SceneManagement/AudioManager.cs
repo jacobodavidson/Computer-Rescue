@@ -11,6 +11,10 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip[] musicTracks;
     [SerializeField] private AudioClip menuMusic;
     [SerializeField] private float crossFadeDuration = 1.0f;
+
+    // Sound effect properties
+    [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private AudioClip jumpSound;
     
     private AudioSource crossFadeSource;
     private int currentSceneIndex = -1;
@@ -28,6 +32,14 @@ public class AudioManager : MonoBehaviour
             crossFadeSource.loop = true;
             crossFadeSource.volume = 0;
             crossFadeSource.playOnAwake = false;
+            
+            // Initialize SFX source if not assigned
+            if (sfxSource == null)
+            {
+                sfxSource = gameObject.AddComponent<AudioSource>();
+                sfxSource.loop = false;
+                sfxSource.playOnAwake = false;
+            }
             
             // Register for scene load events
             SceneManager.sceneLoaded += OnSceneLoaded;
@@ -128,6 +140,23 @@ public class AudioManager : MonoBehaviour
         if (musicSource != null)
         {
             musicSource.volume = volume;
+        }
+    }
+
+    // Play jump sound
+    public void PlayJumpSound()
+    {
+        if (jumpSound != null && sfxSource != null)
+        {
+            sfxSource.PlayOneShot(jumpSound);
+        }
+    }
+    
+    public void SetSFXVolume(float volume)
+    {
+        if (sfxSource != null)
+        {
+            sfxSource.volume = volume;
         }
     }
 }

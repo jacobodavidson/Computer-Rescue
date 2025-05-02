@@ -119,6 +119,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!82 &879226273 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 251018481436376495, guid: 5ab2eb7b760ed9c2fbb4cc2e3a17553f, type: 3}
+  m_PrefabInstance: {fileID: 5858755636706771242}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1033272923
 GameObject:
   m_ObjectHideFlags: 0
@@ -400,32 +405,20 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 3066046835671918176, guid: 5ab2eb7b760ed9c2fbb4cc2e3a17553f, type: 3}
-      propertyPath: crossFadeDuration
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 3066046835671918176, guid: 5ab2eb7b760ed9c2fbb4cc2e3a17553f, type: 3}
-      propertyPath: musicTracks.Array.size
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 3066046835671918176, guid: 5ab2eb7b760ed9c2fbb4cc2e3a17553f, type: 3}
-      propertyPath: 'musicTracks.Array.data[0]'
+      propertyPath: jumpSound
       value: 
-      objectReference: {fileID: 8300000, guid: 48d7e4a66e4d032d1b12794f6d465266, type: 3}
+      objectReference: {fileID: 8300000, guid: c28f64b18a4c3312580ec09a5b43fa4c, type: 3}
     - target: {fileID: 3066046835671918176, guid: 5ab2eb7b760ed9c2fbb4cc2e3a17553f, type: 3}
-      propertyPath: 'musicTracks.Array.data[1]'
+      propertyPath: sfxSource
       value: 
-      objectReference: {fileID: 8300000, guid: 62ae960aa21c9a465ae09f460b2120f5, type: 3}
-    - target: {fileID: 3066046835671918176, guid: 5ab2eb7b760ed9c2fbb4cc2e3a17553f, type: 3}
-      propertyPath: 'musicTracks.Array.data[2]'
-      value: 
-      objectReference: {fileID: 8300000, guid: 48d7e4a66e4d032d1b12794f6d465266, type: 3}
-    - target: {fileID: 3066046835671918176, guid: 5ab2eb7b760ed9c2fbb4cc2e3a17553f, type: 3}
-      propertyPath: 'musicTracks.Array.data[3]'
-      value: 
-      objectReference: {fileID: 8300000, guid: c5a93ac615bcf71369fd4f149977306d, type: 3}
+      objectReference: {fileID: 879226273}
     - target: {fileID: 5582143297027590944, guid: 5ab2eb7b760ed9c2fbb4cc2e3a17553f, type: 3}
       propertyPath: m_Name
       value: AudioManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 6287922759429164697, guid: 5ab2eb7b760ed9c2fbb4cc2e3a17553f, type: 3}
+      propertyPath: m_Volume
+      value: 0.6
       objectReference: {fileID: 0}
     - target: {fileID: 8222752494280141419, guid: 5ab2eb7b760ed9c2fbb4cc2e3a17553f, type: 3}
       propertyPath: m_LocalPosition.x

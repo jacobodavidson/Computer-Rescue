@@ -14,29 +14,37 @@ public class PlayerController : MonoBehaviour
     {
         get
         {
-            if(IsMoving && !touchingDirections.IsOnWall)
+            if(CanMove)
             {
-                if(touchingDirections.IsGrounded)
+                if(IsMoving && !touchingDirections.IsOnWall)
                 {
-                    // Ground speed
-                    if (IsRunning)
+                    if(touchingDirections.IsGrounded)
                     {
-                        return runSpeed;
+                        // Ground speed
+                        if (IsRunning)
+                        {
+                            return runSpeed;
+                        }
+                        else
+                        {
+                            return walkSpeed;
+                        }
                     }
                     else
                     {
-                        return walkSpeed;
+                        // Air speed
+                        return airWalkSpeed;
                     }
                 }
                 else
                 {
-                    // Air speed
-                    return airWalkSpeed;
+                    // Idle speed is 0
+                    return 0f;
                 }
             }
             else
             {
-                // Idle speed is 0
+                // Movement locked
                 return 0f;
             }
         }
@@ -86,6 +94,14 @@ public class PlayerController : MonoBehaviour
         {
             _isRunning = value;
             animator.SetBool(AnimationStrings.isRunning, value);
+        }
+    }
+
+    public bool CanMove
+    {
+        get
+        {
+            return animator.GetBool(AnimationStrings.canMove);
         }
     }
 
@@ -143,11 +159,13 @@ public class PlayerController : MonoBehaviour
 
     public void OnJump(InputAction.CallbackContext context)
     {
-        // TODO: check if alive as well
-        if (context.started && touchingDirections.IsGrounded)
+        if (context.started && touchingDirections.IsGrounded && CanMove)
         {
             animator.SetTrigger(AnimationStrings.jump);
             rb.linearVelocity = new Vector2(rb.linearVelocity.x, jumpImpulse);
+
+            // Play jump sound
+            AudioManager.Instance.PlayJumpSound();
         }
     }
 }
